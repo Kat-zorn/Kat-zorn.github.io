@@ -1,0 +1,33 @@
+li
+{
+    max-width: fit-content;
+    font-size: large;
+}
+
+h1
+{
+    max-width: fit-content;
+}
+
+h2
+{
+    max-width: fit-content;
+}
+
+a
+{
+    max-width: fit-content;
+}
+
+ul
+{
+    max-width: fit-content;
+}
+
+.Centered
+{
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
