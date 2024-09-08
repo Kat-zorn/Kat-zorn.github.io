@@ -31,3 +31,11 @@ ul
     margin-right: auto;
 }
 
+.Red-Box
+{
+    background-color: rgb(165, 0, 0);
+    padding-bottom: 0.1rem;
+    padding-top: 0.1rem;
+    color: white;
+    max-height: max-content;
+}
