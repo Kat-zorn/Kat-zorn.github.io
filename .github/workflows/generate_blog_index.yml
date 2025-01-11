@@ -1,0 +1,11 @@
+on:
+  push:
+    branches:
+      - main
+jobs:
+  generate_index:
+    name: Generate index
+    runs-on: ubuntu-latest
+    steps:
+    - name: Do the thing
+      run: ls blogs > index
