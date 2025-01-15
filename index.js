@@ -4,7 +4,7 @@ function onBodyLoad() {
 }
 
 function instantiateBlogEntry(name) {
-    return "<a href=\"blogs/" + name + "\">" + name + "</a><br>\n";
+    return "<a href=\"md-render?filename=" + name + "\">" + name + "</a><br>\n";
 }
 
 function loadBlogs(filename) {
