@@ -1,18 +1,25 @@
 function onBodyLoad() {
-    let blogEntryList = document.getElementById("BlogList");
-    var blogIndexFile = "blog_index";
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open('GET', blogIndexFile, false); // false for synchronous request
-    xmlHttp.send(null);
-    let ret = xmlHttp.responseText;
-    let blogs = ret.split('\n');
-    blogs.forEach((name) => {
-        const entry = instantiateBlogEntry(name);
-        blogEntryList.innerHTML += entry;
-    });
-    return 0;
+    writeBlogs("blog_index", "BlogList");
+    writeBlogs("pinned_index", "PinnedList");
 }
 
 function instantiateBlogEntry(name) {
     return "<a href=\"blogs/" + name + "\">" + name + "</a><br>\n";
+}
+
+function loadBlogs(filename) {
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.open('GET', filename, false); // false for synchronous request
+    xmlHttp.send(null);
+    const ret = xmlHttp.responseText;
+    return ret.split('\n');
+}
+
+function writeBlogs(filename, listID) {
+    const list = document.getElementById(listID);
+    let blogs = loadBlogs(filename);
+    blogs.forEach((name) => {
+        const entry = instantiateBlogEntry(name);
+        list.innerHTML += entry;
+    });
 }
