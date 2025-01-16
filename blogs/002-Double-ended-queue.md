@@ -1,5 +1,7 @@
 # Double-ended Queue
 
+> By Luka Bijma, written 10-01-2025, and last updated 16-01-2025. Published to [my blog](https://blazing-blast.github.io/).
+
 ## How a `Vector` works
 
 We are probably all familiar with the `Vector`. In most languages, it is a generic class that implements `push(val)` and `pop()`.
@@ -244,3 +246,7 @@ void RingQueueT::extend(uint64_t new_capacity)
 ```
 
 As you can see, we no longer have a use for starting the data in the center. It is indeed true that `extend` is less expensive when no looping has occurred, but `extend` will not naturally be called unless the capacity is satiated, which necessarily is when looping has already occurred.
+
+In conclusion, the ring-buffer approach allows us to push and pop from both the front and back, while still making optimal use of the allocated capacity. It does so with nearly no performance penalty compared to traditional `Vector`s (as it still just uses `data[index++]`), but with more expensive `length` calls and direct indexing (as you need to take the index modulo capacity).
+
+Thank you for reading my first proper article. I do enjoy webdev enough to make a comment section, so if you want to say anything, you can do so at [the Github](https://github.com/Blazing-Blast/Blazing-Blast.github.io/), [my email](mailto:spamtheblaze@gmail.com), or Discord at @blazingblast.
