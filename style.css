@@ -1,9 +1,3 @@
-li
-{
-    max-width: fit-content;
-    font-size: large;
-}
-
 h1
 {
     max-width: fit-content;
@@ -19,11 +13,6 @@ a
     max-width: fit-content;
 }
 
-ul
-{
-    max-width: fit-content;
-}
-
 .Centered
 {
     max-width: fit-content;
@@ -33,9 +22,38 @@ ul
 
 .RedBox
 {
-    background-color: rgb(165, 0, 0);
-    padding-bottom: 0.1rem;
-    padding-top: 0.1rem;
+    background-color: rgb(52, 11, 0);
+    border-radius: 2rem;
+    /* padding-bottom: 0.1rem; */
+    /* padding-top: 0.1rem; */
+    padding: 1rem;
     color: white;
     max-height: max-content;
+}
+
+.C\+\+ {
+    color: rgb(212, 104, 47);
+}
+
+pre {
+    margin-left: 1cm;
+}
+
+body {
+    background-color: black;
+    color: white;
+    margin: 1cm;
+    font-size: large;
+}
+
+code {
+    color: rgb(236, 45, 230);
+}
+
+del {
+    color: red;
+}
+
+a {
+    color: rgb(162, 83, 27);
 }
