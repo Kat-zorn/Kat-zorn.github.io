@@ -1,0 +1,22 @@
+.C\+\+ {
+    color: rgb(212, 104, 47);
+}
+
+pre {
+    margin-left: 1cm;
+}
+
+body {
+    background-color: black;
+    color: white;
+    margin: 1cm;
+    font-size: large;
+}
+
+code {
+    color: rgb(236, 45, 230);
+}
+
+del {
+    color: red;
+}

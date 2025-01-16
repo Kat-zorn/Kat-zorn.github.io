@@ -1,7 +1,8 @@
 function renderMarkdown() {
     let filename = getArgument('filename');
     let markdown = loadMarkdown(filename);
-    let converter = new Markdown.Converter();
+    let converter = new showdown.Converter();
+    converter.setOption('strikethrough', true);
     let html = converter.makeHtml(markdown);
     let body = document.getElementById('MarkdownBody');
     body.innerHTML += html;
