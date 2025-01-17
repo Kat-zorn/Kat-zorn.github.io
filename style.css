@@ -31,8 +31,8 @@ a
     max-height: max-content;
 }
 
-.C\+\+ {
-    color: rgb(212, 104, 47);
+.C\+\+,.Rust {
+    color: rgb(237, 143, 93);
 }
 
 pre {
