@@ -13,3 +13,7 @@ I am pursuing a double-bachelor Computer Science & Engineering and Applied Mathe
 ## Experience
 
 I have been programming hobby projects for 4 years now, and I would like to say that I'm pretty good at it. I am most proficient in C++ and Rust, but I know my way around Python too, and I can probably fill the alphabet with languages that I am able to write a Hello World and an If-Else in.
+
+## Contact
+
+You can reach me at [the Github](https://github.com/Blazing-Blast/Blazing-Blast.github.io/), [my email](mailto:spamtheblaze@gmail.com), Discord at @blazingblast, or if there's really no better option, you could try [Reddit](https://reddit.com/u/ballisticp-enguin/).

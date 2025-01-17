@@ -249,4 +249,4 @@ As you can see, we no longer have a use for starting the data in the center. It 
 
 In conclusion, the ring-buffer approach allows us to push and pop from both the front and back, while still making optimal use of the allocated capacity. It does so with nearly no performance penalty compared to traditional `Vector`s (as it still just uses `data[index++]`), but with more expensive `length` calls and direct indexing (as you need to take the index modulo capacity).
 
-Thank you for reading my first proper article. I do enjoy webdev enough to make a comment section, so if you want to say anything, you can do so at [the Github](https://github.com/Blazing-Blast/Blazing-Blast.github.io/), [my email](mailto:spamtheblaze@gmail.com), or Discord at @blazingblast.
+Thank you for reading my first proper article. I don't enjoy webdev enough to make a comment section, so if you want to say anything, you can do so at [the Github](https://github.com/Blazing-Blast/Blazing-Blast.github.io/), [my email](mailto:spamtheblaze@gmail.com), or Discord at @blazingblast.
