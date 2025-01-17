@@ -6,8 +6,8 @@
 ## Foreword
 
 My target audience consists of computer scientists, therefore I will be foregoing some of the mathematical rigor for the sake of keeping this readable to them.
-In my notation, I will use both `!` as $\lnot$ for NOT, `&&` and $\land$ for AND, and `||` and $\lor$ for OR, depending on whether I am discussing theory or code.
-I will assume these boolean operators as preliminary knowledge together with big $\mathcal{O}$ notation.
+In my notation, I will use both `!` as $$\lnot$$ for NOT, `&&` and $$\land$$ for AND, and `||` and $$\lor$$ for OR, depending on whether I am discussing theory or code.
+I will assume these boolean operators as preliminary knowledge together with big $$\mathcal{O}$$ notation.
 
 ## What even is a SAT solver?
 
@@ -15,10 +15,12 @@ SAT stands for ‘satisfiability.’ A SAT solver’s job then is to find out wh
 
 ### Boolean logic 101
 
-Many programming languages implement so-called ‘boolean operators’. `&&` for AND, `||` for OR, and `!` for NOT. We will only consider these logical operators, and not others like $\implies$ and $\iff$. You may have heard that a computer can be build using just NAND-gates, as we have both AND and NOT, we also have NAND. Therefore, you can express all logic in these operators as well. In a proof that is left to the reader, you can find that all statements can be brought to an even more restricted form called Conjunctive Normal Form (CNF).
+Many programming languages implement so-called ‘boolean operators’. `&&` for AND, `||` for OR, and `!` for NOT. We will only consider these logical operators, and not others like $$\implies$$ and $$\iff$$. You may have heard that a computer can be build using just NAND-gates, as we have both AND and NOT, we also have NAND. Therefore, you can express all logic in these operators as well. In a proof that is left to the reader, you can find that all statements can be brought to an even more restricted form called Conjunctive Normal Form (CNF).
 
-A formula in CNF can be described as a ‘conjunction of disjunctions,’ or more casually as an ‘AND of ORs.’ A disjunction is a bunch of other formulae linked together by ORs. In this case these other formulae must all be either $x$ or $\lnot x$ where $x$ is a boolean variable. This means that a formula in CNF is a bunch of these disjunctions linked together by ANDs. See here an example of a formula in CNF in math mathematical and programmer notation
+A formula in CNF can be described as a ‘conjunction of disjunctions,’ or more casually as an ‘AND of ORs.’ A disjunction is a bunch of other formulae linked together by ORs. In this case these other formulae must all be either $$x$$ or $$\lnot x$$ where $x$ is a boolean variable. This means that a formula in CNF is a bunch of these disjunctions linked together by ANDs. See here an example of a formula in CNF in math mathematical and programmer notation
+
 $$(a \lor b) \land (a \lor \lnot b) \land (\lnot a \lor b),$$
+
 $$(a \| b)\, \&\& \,(a \| !b)\, \&\& \,(!a \| b).$$
 
 To evaluate such a formula, you simply fill in `true` or `false` for each of the variables, and apply the boolean operators.
@@ -279,7 +281,7 @@ impl Solver {
 }
 ```
 
-This is the final improvement that I will show you, but I hope that you take away that there is a lot to be learned about SAT solvers, and that they are a really interesting tool to have, even for non-mathematicians. But most importantly, that they are demystified and have become a concrete piece of software to you, instead of just a weird, mathematical concept that has something to do with $P = NP$.
+This is the final improvement that I will show you, but I hope that you take away that there is a lot to be learned about SAT solvers, and that they are a really interesting tool to have, even for non-mathematicians. But most importantly, that they are demystified and have become a concrete piece of software to you, instead of just a weird, mathematical concept that has something to do with $$P = NP$$.
 
 ## Other things that I want to mention
 

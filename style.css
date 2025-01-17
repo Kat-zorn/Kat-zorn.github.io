@@ -57,3 +57,17 @@ del {
 a {
     color: rgb(162, 83, 27);
 }
+
+@font-face {
+    font-family: 'jsMath-cmsy10';
+    src: url('font/jsMath-cmsy10.ttf.woff') format('woff'),
+        url('font/jsMath-cmsy10.ttf.svg#jsMath-cmsy10') format('svg'),
+        url('font/jsMath-cmsy10.ttf.eot'),
+        url('font/jsMath-cmsy10.ttf.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.mathcal{
+    font-family: jsMath-cmsy10;
+}

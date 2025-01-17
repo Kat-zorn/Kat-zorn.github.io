@@ -3,9 +3,16 @@ function renderMarkdown() {
     let markdown = loadMarkdown(filename);
     let converter = new showdown.Converter();
     converter.setOption('strikethrough', true);
+    converter.addExtension(showdownKatex(
+        {
+            output: 'html',
+            throwOnError: false,
+            displayMode: true
+         }))
     let html = converter.makeHtml(markdown);
     let body = document.getElementById('MarkdownBody');
     body.innerHTML += html;
+    document.getElementsByClassName("katex-html").innerHTML += "hidden=true";
 }
 
 function getArgument(name) {
