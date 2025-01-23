@@ -1,3 +1,4 @@
+#include "hip/hip_runtime.h"
 #include <iostream>
 #include <cinttypes>
 #include <random>
@@ -9,33 +10,30 @@ constexpr int blockSize = 1 << 10;
 constexpr int blockCount = 1 << 10;
 constexpr int totalThreads = blockSize * blockCount;
 
-__always_inline int main_unthreaded();
-__always_inline int main_threaded();
-__global__ void roll_cuda(uint_fast8_t *ret, uint64_t seed);
-__device__ static __always_inline uint64_t wyrand(uint64_t &seed);
+__global__ void roll_hip(uint_fast8_t *ret, uint64_t seed);
+__device__ uint64_t wyrand(uint64_t &seed);
+void hip_catch(hipError_t err);
 
 int main()
 {
     std::random_device rd;
     uint_fast8_t highest = 0;
     uint_fast8_t *results;
-    cudaEvent_t start, stop;
+    hipEvent_t start, stop;
     float time;
     const uint64_t seed = ((uint64_t)rd() << 32) | rd();
 
-    cudaEventCreate(&start);
-    cudaEventCreate(&stop);
+    hip_catch(hipEventCreate(&start));
+    hip_catch(hipEventCreate(&stop));
+    hip_catch(hipEventRecord(start, 0));
+    hip_catch(hipMallocManaged(&results, blockCount * blockSize * sizeof(*results)));
 
-    cudaEventRecord(start, 0);
-    cudaMallocManaged(&results, blockCount * blockSize * sizeof(*results));
+    roll_hip<<<blockCount, blockSize>>>(results, seed);
+    hip_catch(hipEventRecord(stop, 0));
+    hip_catch(hipEventSynchronize(stop));
+    hip_catch(hipEventElapsedTime(&time, start, stop));
 
-    roll_cuda<<<blockCount, blockSize>>>(results, seed);
-    cudaEventRecord(stop, 0);
-
-    cudaEventSynchronize(stop);
-    cudaEventElapsedTime(&time, start, stop);
-
-    for (size_t i = 0; i < blockCount * blockSize; i++)
+    for (size_t i = 0; i < totalThreads; i++)
     {
         highest = std::max(highest, results[i]);
     }
@@ -43,16 +41,22 @@ int main()
     std::cout << "My record is: " << (int)highest << ".\nIt took me " << time << "ms.\n";
     return 0;
 }
-
-__global__ void roll_cuda(uint_fast8_t *results, uint64_t seed)
+void hip_catch(hipError_t err)
 {
-    uint_fast8_t highest = 0;
-    int index = blockIdx.x * blockDim.x + threadIdx.x;
+    if (err)
+    {
+        std::cerr << "HIP errorcode "
+                  << err << '\n';
+    }
+}
 
+__global__ void roll_hip(uint_fast8_t *results, uint64_t seed)
+{
+    uint_fast8_t highest;
     uint_fast8_t current;
+    uint32_t index = blockIdx.x * blockDim.x + threadIdx.x;
     seed += index;
-
-    const size_t runs = (maxRuns / totalThreads) + (index < maxRuns % (totalThreads));
+    const size_t runs = (maxRuns / totalThreads) + (index < (maxRuns % totalThreads));
     for (size_t i = 0; i < runs; i++)
     {
         current = __popcll(wyrand(seed) & wyrand(seed));
@@ -64,7 +68,7 @@ __global__ void roll_cuda(uint_fast8_t *results, uint64_t seed)
     results[index] = highest;
 }
 
-__device__ static __always_inline uint64_t wyrand(uint64_t &seed)
+__device__ uint64_t wyrand(uint64_t &seed)
 {
     seed += 0xa0761d6478bd642full;
     uint64_t A = seed,

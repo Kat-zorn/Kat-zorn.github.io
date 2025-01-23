@@ -1,2 +1,2 @@
 #!/bin/bash
-HIP_PLATFORM='amd' hipcc $1.hip -o $1
+HIP_PLATFORM='amd' hipcc -xhip $1.cu -o $1
