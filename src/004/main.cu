@@ -50,7 +50,7 @@ int main()
     }
 
     std::chrono::time_point after = std::chrono::high_resolution_clock::now();
-    float time_cpu = (after - before).count() * 0.001;
+    float time_cpu = (after - before).count() * 0.000001;
 
     std::cout << "My record is: " << (int)highest << " .\n"
               << "It took me " << time_gpu << "ms on the GPU.\n"
