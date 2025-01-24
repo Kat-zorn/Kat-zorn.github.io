@@ -9,7 +9,7 @@ You can `push` values to the end of the `Vector`, and `pop` values from the tail
 
 I will quickly explain how this works, and provide some implementation examples.
 Note that I will be omitting the template magic, and simply assume that we have a type named `T` that we want our vector to act on.
-On top of that, I will not be marking everything `const`, and I will not deal with error handling. Lastly, I will use C++ in a C-like way. All of this is to ensure that the concepts that I wish to discuss are clear in the code and not obfuscated by C++'s unreadability (for people who aren't wizards).
+On top of that, I will not be marking everything `const`, and I will not deal with error handling. Lastly, I will use C++ in a C-like way. All of this is to ensure that the concepts that I wish to discuss are clear in the code and not obfuscated by C++‘s unreadability (for people who aren‘t wizards).
 A naive vector is defined in the following fashion:
 
 ```C++
@@ -33,7 +33,7 @@ public:
 T VectorT::pop() {
     if (length == 0) // Very unlikely
     {
-        // I also don't feel like bothering with error handling,
+        // I also don‘t feel like bothering with error handling,
         // so return null it is.
         return T::NULL;
     }
@@ -41,7 +41,7 @@ T VectorT::pop() {
 }
 ```
 
-The `push` implementation follows a similar idea, but we need to consider the case where the capacity of the vector is already filled. In that case, we must first make room for our new data. We double the previous capacity to make sure that we don't need to reallocate too often. Other growth factors are possible, but we won't consider them.
+The `push` implementation follows a similar idea, but we need to consider the case where the capacity of the vector is already filled. In that case, we must first make room for our new data. We double the previous capacity to make sure that we don‘t need to reallocate too often. Other growth factors are possible, but we won‘t consider them.
 
 ```C++
 void VectorT::push(T value) {
@@ -165,7 +165,7 @@ void QueueT::extend(uint64_t new_capacity)
 ```
 
 This solution is already a lot better. It is amortized constant in time (unlike the `Shift Vector`), and it does not do unneeded memory operations.
-It does have two slight problems. When the back end runs out of capacity, we should be able to try to only extend the back using `realloc` instead. This sadly doesn't work with `realloc`, as the way to copies over the data when the original buffer could not be extended costs us extra time (and forces a `memmove` instead of a `memcpy`). We could write our own version of `realloc` to deal with this, but this `Queue` has worse issues that we should deal with. The second issue is that when you don't `push` to the frond and back evenly. This will result in basically wasting half of the `Queue`'s capacity.
+It does have two slight problems. When the back end runs out of capacity, we should be able to try to only extend the back using `realloc` instead. This sadly doesn‘t work with `realloc`, as the way to copies over the data when the original buffer could not be extended costs us extra time (and forces a `memmove` instead of a `memcpy`). We could write our own version of `realloc` to deal with this, but this `Queue` has worse issues that we should deal with. The second issue is that when you don‘t `push` to the frond and back evenly. This will result in basically wasting half of the `Queue`‘s capacity.
 
 ## `Queue` candidate: Ring buffers
 
@@ -208,7 +208,7 @@ void RingQueueT::push_front(T value)
 }
 ```
 
-Although the `length` function is now a bit more convoluted, it won't actually be called while `push`ing and `pop`ping, so it doesn't matter all too much. On top of that, everything is still in (amortized) constant time.
+Although the `length` function is now a bit more convoluted, it won‘t actually be called while `push`ing and `pop`ping, so it doesn‘t matter all too much. On top of that, everything is still in (amortized) constant time.
 The `extend` method, on the other hand, does get called while `push`ing, and it gets the same complications as the `length` function. Its new implementation is as follows:
 
 ```C++
@@ -223,7 +223,7 @@ void RingQueueT::extend(uint64_t new_capacity)
     uint64_t new_back_index = 0;
     uint64_t new_front_index = length();
 
-    // In this case, we could also just have realloced, but for simplicity, I'll keep every branch as similar as possible.
+    // In this case, we could also just have realloced, but for simplicity, I‘ll keep every branch as similar as possible.
     if (empty); // Very unlikely, only happens in the constructor. No copying needs to be done in this case.
     else if (front_index > back_index) // Very unlikely, will not occur due to other methods in this class, only when a user explicitly calls this method.
     {
@@ -249,4 +249,4 @@ As you can see, we no longer have a use for starting the data in the center. It 
 
 In conclusion, the ring-buffer approach allows us to push and pop from both the front and back, while still making optimal use of the allocated capacity. It does so with nearly no performance penalty compared to traditional `Vector`s (as it still just uses `data[index++]`), but with more expensive `length` calls and direct indexing (as you need to take the index modulo capacity).
 
-Thank you for reading my first proper article. I don't enjoy webdev enough to make a comment section, so if you want to say anything, you can do so at [the Github](https://github.com/Blazing-Blast/Blazing-Blast.github.io/), [my email](mailto:spamtheblaze@gmail.com), or Discord at @blazingblast.
+Thank you for reading my first proper article. I don‘t enjoy webdev enough to make a comment section, so if you want to say anything, you can do so at [the Github](https://github.com/Blazing-Blast/Blazing-Blast.github.io/), [my email](mailto:spamtheblaze@gmail.com), or Discord at @blazingblast.

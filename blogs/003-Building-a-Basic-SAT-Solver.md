@@ -123,7 +123,7 @@ We can achieve this by modifying the `Solver` struct to the following
 
 ```Rust
 // We could just use Option<bool>, but I believe this is clearer.
-// In case you aren't familiar with Rust's enums,
+// In case you aren‘t familiar with Rust‘s enums,
 // you can think of it as a C-style enum together with a union, also called a tagged union.
 enum SolveState {
     Decided {
@@ -141,7 +141,7 @@ struct Solver {
 }
 ```
 
-We no longer need to use the index to keep track of which variable is set, as we can already track that using the enum variants. Instead, we use `var_index` to not have to recalculate which variable we're assigning too next.
+We no longer need to use the index to keep track of which variable is set, as we can already track that using the enum variants. Instead, we use `var_index` to not have to recalculate which variable we‘re assigning too next.
 With this new `SolveState`, we must update the `evaluate` functions.
 
 ```Rust
@@ -228,7 +228,7 @@ impl CNF {
 }
 ```
 
-As usual, this same logic can be extended to to `Disjunction::simplify`. `Term`s, on the other hand, need be simplified, as they will simply be eliminated from the disjunction as soon as they are resolved. We can now insert this new `simplify` method into our `solve` function (yes, it is a function now, because we're backtracking properly). This new implementation looks as follows:
+As usual, this same logic can be extended to to `Disjunction::simplify`. `Term`s, on the other hand, need be simplified, as they will simply be eliminated from the disjunction as soon as they are resolved. We can now insert this new `simplify` method into our `solve` function (yes, it is a function now, because we‘re backtracking properly). This new implementation looks as follows:
 
 ```Rust
 impl Solver {
@@ -320,4 +320,4 @@ Where each disjunction is a space-separated list of numbers(variable names) with
 
 ### SAT competitions
 
-For benchmark files, I've found the [SAT competition](https://satcompetition.github.io/2024/) a good source. They are also a nice resource for if you wish to build a SAT solver and compete with it, and you can find many very fast open-source solvers listed on the site.
+For benchmark files, I‘ve found the [SAT competition](https://satcompetition.github.io/2024/) a good source. They are also a nice resource for if you wish to build a SAT solver and compete with it, and you can find many very fast open-source solvers listed on the site.
